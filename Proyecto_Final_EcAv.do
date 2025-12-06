@@ -5,15 +5,17 @@
 * DESCRIPCIÓN: Metodología 
 * *****************************************************************
 clear all
-cd "C:\Users\Marlon Angulo\Desktop\Proyecto Final EcAv"
 ssc install distinct
 
 
 * *****************************************************************
 * 1. Sección de datos
 * *****************************************************************
+* Descargar la base directamente desde GitHub
+copy "https://github.com/9marlon9/Proyecto-Final-EcAv/raw/master/Bases/panel_jornada_unica_2012_2019_oficiales.dta" "panel_jornada_unica_2012_2019_oficiales.dta", replace
 
-use panel_jornada_unica_2012_2019_oficiales, clear
+* Abrir la base
+use "panel_jornada_unica_2012_2019_oficiales.dta", clear
 
 *Generar variable de tratamiento
 drop if tratamiento == .
@@ -85,7 +87,6 @@ ds
 label var tratado "Indicador: 1 si el colegio está en Jornada Única"
 
 * Ever treated (colegios que alguna vez adoptan jornada única)
-bys cole_cod_dane_establecimiento: egen ever_treated = max(tratado)
 label var ever_treated "1 si el colegio adopta Jornada Única en algún año"
 
 * Cohorte de adopción Gi = primer año en que el colegio es tratado
